@@ -1,0 +1,14 @@
+export const projects = [
+  { slug: '', name: 'Jesús Aragón', category: 'Currículum · Desarrollo', short: 'Currículum', color: '#e96835', scene: 'cv', title: 'Jesús Aragón — Desarrollador de aplicaciones', description: 'Desarrollador de aplicaciones multiplataforma en Cádiz. Frontend, backend y datos. Experiencia, formación y portfolio de Jesús Aragón Monzón.' },
+  { slug: 'pelago', name: 'Pélago', category: 'Océano · Experiencias', short: 'Océano', color: '#62cbd0', scene: 'ocean', title: 'Pélago — Respira.', description: 'Un concepto de escapadas junto al océano. Agua, luz y tiempo para volver a lo esencial.' },
+  { slug: 'forma', name: 'Forma', category: 'Arquitectura · Espacios', short: 'Arquitectura', color: '#afa08c', scene: 'architecture', title: 'Forma — Una casa, muchas formas de vivir', description: 'Estudio de arquitectura conceptual. Espacios honestos, materiales naturales y luz.' },
+  { slug: 'orbita', name: 'Órbita', category: 'Espacio · Exploración', short: 'Espacio', color: '#a5b5ff', scene: 'space', title: 'Órbita — Nuestro pequeño universo', description: 'Un sistema solar interactivo para explorar sus ocho planetas, sus órbitas y los anillos de Saturno.' },
+  { slug: 'pulso', name: 'Pulso', category: 'Música · Festival', short: 'Música', color: '#d6ff52', scene: 'music', title: 'Pulso — Siente la frecuencia', description: 'Festival conceptual de música electrónica, cultura de club y arte audiovisual.' },
+  { slug: 'bruma', name: 'Bruma', category: 'Perfumería · Sensorial', short: 'Perfumería', color: '#c4a8ce', scene: 'perfume', title: 'Bruma — Lo invisible permanece', description: 'Perfumería de autor. Tres recuerdos convertidos en fragancias.' },
+  { slug: 'umbral', name: 'Umbral', category: 'Arte · Galería', short: 'Arte', color: '#ff4a36', scene: 'art', title: 'Umbral — Nada permanece quieto', description: 'Una galería experimental entre la escultura, el código y la percepción.' },
+  { slug: 'miga', name: 'Miga', category: 'Gastronomía · Obrador', short: 'Gastronomía', color: '#edbd58', scene: 'bread', title: 'Miga — Hoy hay pan.', description: 'Un obrador conceptual de masa madre. Harina, agua, paciencia y un poco de magia.' },
+  { slug: 'cota', name: 'Cota', category: 'Montaña · Aventura', short: 'Montaña', color: '#9daa80', scene: 'mountain', title: 'Cota — Más allá del ruido', description: 'Exploración de montaña y rutas para quienes prefieren el camino largo.' },
+  { slug: 'nexo', name: 'Nexo', category: 'Tecnología · Inteligencia', short: 'Inteligencia artificial', color: '#83a8fb', scene: 'ai', title: 'Nexo — Las ideas no viven solas', description: 'Un concepto de inteligencia aplicada para conectar datos, ideas y decisiones.' },
+] as const;
+export type SceneKind = typeof projects[number]['scene'];
+export type Project = typeof projects[number];

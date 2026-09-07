@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+import '@fontsource-variable/manrope';
+import '@fontsource-variable/space-grotesk';
+import '@fontsource/cormorant-garamond/400.css';
+import '@fontsource/cormorant-garamond/400-italic.css';
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/bebas-neue';
+import { projects, type Project } from '../data/projects';
+import { withBase } from '../lib/paths.mjs';
+interface Props { project: Project }
+const { project } = Astro.props;
+const index = projects.findIndex(p => p.slug === project.slug);
+const url = (slug: string) => withBase(slug ? `${slug}/` : '', import.meta.env.BASE_URL);
+const previous = projects[(index + 9) % 10];
+const next = projects[(index + 1) % 10];
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={project.description} />
+    <meta name="theme-color" content="#f7f7f2" />
+    <meta property="og:title" content={project.title} />
+    <meta property="og:description" content={project.description} />
+    <meta property="og:type" content="website" />
+    {Astro.site && <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />}
+    <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg', import.meta.env.BASE_URL)} />
+    <title>{project.title}</title>
+    <noscript><style is:global>@media(max-width:800px){.sidebar{position:relative;top:auto;transform:none;width:100%;box-shadow:none}.sidebar nav{display:grid;grid-template-columns:1fr 1fr}.sidebar-bottom,.menu-toggle{display:none}}</style></noscript>
+  </head>
+  <body style={`--project-accent: ${project.color}`}>
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <div class="mobile-bar"><a href={url('')} class="monogram">ja<span>®</span></a><span>ÍNDICE DE EXPLORACIONES</span><button class="menu-toggle" aria-expanded="false" aria-controls="gallery-sidebar">Menú <span>＋</span></button></div>
+    <aside class="sidebar" id="gallery-sidebar">
+      <a class="sidebar-brand" href={url('')} aria-label="Jesús Aragón, inicio"><span class="monogram">ja<span>®</span></span><span>JESÚS ARAGÓN<br/><small>PORTFOLIO / 2026</small></span></a>
+      <div class="sidebar-intro"><span class="eyebrow">UN MISMO AUTOR.</span><p>Diez formas<br/>de ver la web.</p></div>
+      <div class="index-label"><span>EXPLORACIONES</span><span>01 — 10</span></div>
+      <nav aria-label="Seleccionar landing">
+        {projects.map((p, i) => <a class:list={['project-link', { active: p.slug === project.slug }]} href={url(p.slug)} aria-current={p.slug === project.slug ? 'page' : undefined} style={`--swatch: ${p.color}`}><span class="project-number">{String(i + 1).padStart(2, '0')}</span><span class="project-info"><strong>{p.name}</strong><small>{p.short}</small></span><span class="project-dot" aria-hidden="true"></span></a>)}
+      </nav>
+      <div class="sidebar-bottom"><a href="mailto:j.aragonmonzon@gmail.com">¿Creamos algo? <span>↗</span></a><div><span class="live-dot"></span> Hecho en Cádiz <span>36° N / 6° O</span></div></div>
+    </aside>
+    <div class="gallery-main">
+      <header class="gallery-topbar"><div><span class="status-dot"></span><span>LA COLECCIÓN</span><span class="topbar-slash">/</span><span>{project.short}</span></div><div class="topbar-right"><span>{index === 0 ? 'PERFIL PROFESIONAL' : 'CONCEPTO EXPERIMENTAL'}</span><span class="edition">{String(index + 1).padStart(2, '0')} / 10</span></div></header>
+      <main id="main" class={`landing landing-${project.scene}`}><slot /></main>
+      <footer class="gallery-footer"><span>DISEÑO Y DESARROLLO · JESÚS ARAGÓN</span><div><a href={url(previous.slug)} aria-label={`Anterior: ${previous.name}`}>←</a><span>{String(index + 1).padStart(2, '0')} / 10</span><a href={url(next.slug)} aria-label={`Siguiente: ${next.name}`}>→</a></div></footer>
+    </div>
+    <script>
+      import '../scripts/interface';
+      import '../scripts/scenes';
+    </script>
+  </body>
+</html>

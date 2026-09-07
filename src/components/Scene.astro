@@ -1,0 +1,9 @@
+---
+import type { SceneKind } from '../data/projects';
+interface Props { kind: SceneKind; label: string; class?: string }
+const { kind, label, class: className = '' } = Astro.props;
+---
+<div class={`scene scene-${kind} ${className}`} data-scene={kind} role="img" aria-label={label}>
+  <span class="scene-fallback" aria-hidden="true">{kind === 'cv' ? 'JA' : '◌'}</span>
+  <canvas aria-hidden="true"></canvas>
+</div>
