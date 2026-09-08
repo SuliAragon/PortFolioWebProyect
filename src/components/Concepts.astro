@@ -44,5 +44,43 @@ const { slug } = Astro.props;
 {slug === 'nexo' && <>
   <section class="nexo-workspace"><nav class="concept-nav"><a class="wordmark" href="#">nexo<span>✳</span></a><span>ESPACIO DE CONEXIONES</span><span class="nexo-local">● DEMO LOCAL</span></nav><div class="workspace-title"><span class="eyebrow">ABRE UNA NUEVA PERSPECTIVA</span><h1>Las ideas no viven solas.</h1><p>Elige un contexto. Encuentra lo que conecta las piezas.</p></div><div class="workspace-toolbar" role="group" aria-label="Ejemplo de análisis"><span>EXPLORAR</span><button class="is-selected" data-insight="0" data-variant="0" aria-pressed="true">Producto</button><button data-insight="1" data-variant="1" aria-pressed="false">Equipo</button><button data-insight="2" data-variant="2" aria-pressed="false">Contenido</button><span>⌘ / CONTEXTO</span></div><div class="connection-workbench"><div class="workspace-sources"><span>ENTRADAS / 03</span><div id="insight-sources" class="ai-sources"><span>Comentarios de usuarios</span><span>Uso de funcionalidades</span><span>Solicitudes de soporte</span></div><span class="workspace-flow">→</span></div><div class="workspace-network"><Scene kind="ai" label="Red tridimensional de conexiones que cambia de color según el contexto seleccionado"/><span>NÚCLEO DE CONTEXTO</span></div><div class="workspace-result" aria-live="polite"><span>UNA CONEXIÓN POSIBLE</span><h2 id="insight-title">La fricción también es una señal.</h2><p id="insight-description">Cruzar preguntas de soporte con funciones poco utilizadas ayuda a encontrar qué parte de la experiencia necesita más claridad.</p><span class="connection-status">✓ CONTEXTO RELACIONADO</span></div></div><div class="workspace-status"><span><i></i> TODO SUCEDE EN TU NAVEGADOR</span><span>3 FUENTES → 1 PERSPECTIVA</span><button data-motion aria-pressed="false">Pausar animación Ⅱ</button></div><p class="workspace-disclaimer">Una exploración de interfaz. Los ejemplos están predefinidos; no se envían datos ni se conecta con un modelo de IA.</p></section>
 </>}
-{slug !== 'pelago' && slug !== 'forma' && slug !== 'orbita' && slug !== 'bruma' && slug !== 'nexo' && <div class="concept-motion"><button data-motion aria-pressed="false">Pausar animación Ⅱ</button></div>}
+{slug === 'terminal' && <>
+  <section class="terminal-shell" data-terminal-root data-base={import.meta.env.BASE_URL} data-theme="green">
+    <nav class="terminal-nav"><a href="#" class="terminal-mark">J/A_OS</a><span>SESIÓN PÚBLICA · SANDBOX LOCAL</span><span class="terminal-online"><i></i> ONLINE</span></nav>
+    <div class="terminal-heading"><span>INTERFAZ DE LÍNEA DE COMANDOS / 11</span><h1>Escribe algo.<br/><em>El sistema responde.</em></h1></div>
+    <Scene kind="terminal" label="Núcleo tridimensional de datos formado por módulos, conexiones y una retícula que reacciona a cada comando"/>
+    <div class="terminal-window" data-terminal-window>
+      <div class="terminal-window-bar"><span><i></i><i></i><i></i></span><strong>visitor@jesus-aragon — zsh — 80×24</strong><span>⌘ K</span></div>
+      <div class="terminal-output" id="terminal-output" role="log" aria-live="polite" aria-label="Salida del terminal">
+        <p class="terminal-line terminal-muted">J/A_OS 1.2.0 · sesión segura iniciada</p>
+        <p class="terminal-line">Escribe <strong>help</strong> para descubrir el sistema.</p>
+        <p class="terminal-line terminal-muted">Pista: prueba “whoami”, “projects” o “open orbita”.</p>
+      </div>
+      <form class="terminal-form" data-terminal-form>
+        <label for="terminal-command"><span>visitor@portfolio</span>:~$</label>
+        <input id="terminal-command" data-terminal-input autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="terminal-shortcuts" />
+        <span class="terminal-cursor" aria-hidden="true"></span>
+      </form>
+    </div>
+    <div class="terminal-shortcuts" id="terminal-shortcuts"><span>↑↓ HISTORIAL</span><span>TAB AUTOCOMPLETAR</span><span>CTRL+L LIMPIAR</span></div>
+    <div class="terminal-quick" aria-label="Comandos rápidos"><button data-terminal-command="help">help</button><button data-terminal-command="whoami">whoami</button><button data-terminal-command="projects">projects</button><button data-terminal-command="theme amber">theme amber</button></div>
+    <p class="terminal-note">Simulación local: interpreta comandos del portfolio y nunca accede al sistema de tu equipo.</p>
+  </section>
+</>}
+{slug === 'crudo' && <>
+  <section class="brutal-lab" data-brutal-lab data-mode="structure">
+    <div class="brutal-ticker" aria-hidden="true"><span>IDEAS SIN PLANCHAR</span><b>✦</b><span>ESTRUCTURA A LA VISTA</span><b>✦</b><span>PROBAR / ROMPER / AJUSTAR</span><b>✦</b></div>
+    <div class="brutal-meta"><span>DOCUMENTO<br/><strong>Taller CRUDO / Nº 01</strong></span><span>ESTADO<br/><strong>Funcionando. A propósito.</strong></span><span>HECHO EN<br/><strong>Cádiz · 2026</strong></span></div>
+    <div class="brutal-hero">
+      <div class="brutal-copy"><span>NO ES UNA AGENCIA. ES UNA MESA DE TRABAJO.</span><h1>PRIMERO<br/><mark>FUNCIONA.</mark><br/>LUEGO<br/><i>HABLAMOS.</i></h1></div>
+      <div class="brutal-machine"><Scene kind="brutal" label="Prototipo tridimensional de vigas, paneles, tornillos y piezas separadas que deja visible su estructura"/><span class="brutal-asterisk" aria-hidden="true">✱</span><span class="brutal-machine-label">PROTOTIPO / EN VIVO</span></div>
+    </div>
+    <div class="brutal-console">
+      <div><span>MODO DE PRUEBA</span><strong id="brutal-verb">MOSTRAR LAS COSTURAS</strong><p id="brutal-note" aria-live="polite">Cada unión queda visible. Si algo sostiene la idea, merece ocupar espacio.</p></div>
+      <div class="brutal-modes" role="group" aria-label="Cambiar el prototipo"><button class="is-selected" data-brutal-mode="0" data-variant="0" aria-pressed="true"><small>01</small>ESTRUCTURA</button><button data-brutal-mode="1" data-variant="1" aria-pressed="false"><small>02</small>EXPLOSIÓN</button><button data-brutal-mode="2" data-variant="2" aria-pressed="false"><small>03</small>TENSIÓN</button></div>
+    </div>
+  </section>
+  <section class="brutal-rules" id="reglas"><header><span>NOTAS DE TALLER / 001—003</span><h2>Una idea no necesita<br/>pedir perdón.</h2></header><div class="brutal-rule"><span>001 / MATERIAL</span><h3>Deja la huella.</h3><p>Las marcas del proceso cuentan cómo se construyó. Borrarlas también es una decisión.</p></div><div class="brutal-rule"><span>002 / RITMO</span><h3>Rompe donde importa.</h3><p>La cuadrícula ordena la conversación. La idea decide cuándo salirse de ella.</p></div><div class="brutal-rule"><span>003 / ENTREGA</span><h3>Ponlo a prueba.</h3><p>Un prototipo que se puede tocar explica más que una promesa perfectamente alineada.</p></div></section>
+</>}
+{slug !== 'pelago' && slug !== 'forma' && slug !== 'orbita' && slug !== 'bruma' && slug !== 'nexo' && slug !== 'terminal' && slug !== 'crudo' && <div class="concept-motion"><button data-motion aria-pressed="false">Pausar animación Ⅱ</button></div>}
 <div class="concept-credit"><span>UNA EXPLORACIÓN DE JESÚS ARAGÓN</span><span>Marca y contenido conceptuales · Portfolio</span><a href="#">Volver arriba ↑</a></div>

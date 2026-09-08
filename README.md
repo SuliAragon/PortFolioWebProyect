@@ -1,6 +1,6 @@
-# Jesús Aragón · Diez formas de ver la web
+# Jesús Aragón · Doce formas de ver la web
 
-Portfolio estático en **Astro + TypeScript + Three.js**. Diez páginas independientes, accesibles desde un índice lateral permanente. La portada es el currículum de Jesús Aragón Monzón; las otras nueve son conceptos originales de diseño web.
+Portfolio estático en **Astro + TypeScript + Three.js**. Doce páginas independientes, accesibles desde un índice lateral permanente. La portada es el currículum de Jesús Aragón Monzón; las otras once son conceptos originales de diseño web.
 
 | Página | Concepto | Escena |
 | --- | --- | --- |
@@ -14,6 +14,8 @@ Portfolio estático en **Astro + TypeScript + Three.js**. Diez páginas independ
 | `/miga/` | Obrador de masa madre | Mostrador de hogaza, trenzado y barra |
 | `/cota/` | Exploración de montaña | Cordillera alpina, nieve, bosque y lago |
 | `/nexo/` | Inteligencia y datos | Mesa interactiva de fuentes, red y perspectivas |
+| `/terminal/` | Consola interactiva | Núcleo de datos que responde a comandos, temas e historial |
+| `/crudo/` | Taller brutalista | Prototipo 3D desmontable con estructura, explosión y tensión |
 
 ## Uso local
 
@@ -42,7 +44,7 @@ npm run preview
 3. Ejecutar **Actions → Publicar portfolio en GitHub Pages → Run workflow**, o subir un cambio a `main`.
 4. Al terminar, GitHub mostrará la URL pública en **Settings → Pages**.
 
-El flujo `.github/workflows/deploy.yml` instala las dependencias, comprueba tipos, compila, verifica las diez páginas y publica la carpeta `dist`. La URL y el prefijo del repositorio se obtienen automáticamente de GitHub Pages; funciona tanto en `usuario.github.io` como en `usuario.github.io/nombre-del-repositorio/`.
+El flujo `.github/workflows/deploy.yml` instala las dependencias, comprueba tipos, compila, verifica las doce páginas y publica la carpeta `dist`. La URL y el prefijo del repositorio se obtienen automáticamente de GitHub Pages; funciona tanto en `usuario.github.io` como en `usuario.github.io/nombre-del-repositorio/`.
 
 Para comprobar localmente un despliegue dentro de una subcarpeta:
 
@@ -59,7 +61,8 @@ Documentación oficial: [Astro en GitHub Pages](https://docs.astro.build/en/guid
 - `src/components/Curriculum.astro`: currículum, experiencia, competencias y formación.
 - `public/cv-jesus-aragon.pdf`: PDF original descargable, con los datos de contacto del documento proporcionado.
 - `src/data/projects.ts`: nombres, rutas, metadatos y colores del índice.
-- `src/components/Concepts.astro`: las nueve landings conceptuales.
+- `src/components/Concepts.astro`: las once landings conceptuales.
+- `src/lib/terminal.ts`: intérprete seguro de la consola simulada y autocompletado.
 - `src/styles/global.css`: identidad de cada landing y adaptación a pantallas pequeñas.
 - `src/scripts/three-world.ts`: escenas compartidas y gestión del ciclo de vida.
 - `src/scripts/solar-system.ts` y `src/data/solar.mjs`: sistema solar y controles de exploración.
@@ -68,7 +71,7 @@ Documentación oficial: [Astro en GitHub Pages](https://docs.astro.build/en/guid
 
 El currículum procede exclusivamente del PDF proporcionado. La web muestra Cádiz como ubicación y el correo como contacto; el PDF descargable conserva también su dirección y teléfono originales. No se han inventado perfiles sociales, cargos, clientes ni enlaces a repositorios.
 
-Las nueve marcas adicionales y su contenido son **conceptos de portfolio**, no negocios ni clientes reales. El sintetizador genera audio local; Nexo utiliza ejemplos predefinidos y no envía información ni llama a una IA. No hay formularios, cookies, analítica, servidores ni servicios de pago.
+Las once marcas adicionales y su contenido son **conceptos de portfolio**, no negocios ni clientes reales. El sintetizador genera audio local; Nexo utiliza ejemplos predefinidos y no envía información ni llama a una IA. Terminal interpreta únicamente un conjunto cerrado de comandos del portfolio y no accede al equipo. No hay formularios, cookies, analítica, servidores ni servicios de pago.
 
 ## Accesibilidad y rendimiento
 
@@ -86,6 +89,6 @@ El [experimento compartido por Mia](https://x.com/MiaAI_lab/status/2094894089481
 
 ## Segunda edición visual
 
-El CV, Pulso y Umbral conservan su diseño inicial. Las otras siete páginas se han recompuesto con estructuras independientes: retiro junto al océano, lámina de arquitectura, observatorio solar, editorial de perfume, escaparate de obrador, cuaderno de expedición y mesa de conexiones.
+El CV, Pulso y Umbral conservan su diseño inicial. Las otras páginas usan estructuras independientes: retiro junto al océano, lámina de arquitectura, observatorio solar, editorial de perfume, escaparate de obrador, cuaderno de expedición, mesa de conexiones, consola interactiva y taller brutalista.
 
 El sistema solar es una visualización artística: los tamaños, las distancias y las velocidades no están a escala. Puedes seleccionar un planeta con los botones o pulsar directamente sobre él, ajustar la velocidad orbital y regresar al sistema completo.

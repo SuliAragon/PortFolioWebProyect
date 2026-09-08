@@ -31,7 +31,7 @@ jobs:
         env:
           BASE_PATH: ${{ steps.pages.outputs.base_path }}/
           SITE_URL: ${{ steps.pages.outputs.origin }}
-      - name: Verificar las diez landings
+      - name: Verificar las doce landings
         run: npm test
         env:
           BASE_PATH: ${{ steps.pages.outputs.base_path }}/

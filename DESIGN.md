@@ -2,7 +2,7 @@
 
 Una galería editorial: el índice permanece calmado para que cada pieza pueda tener una voz propia. La identidad personal usa naranja mineral, papel gris verdoso, tipografía Space Grotesk y una escultura central.
 
-El resto de la colección explora nueve lenguajes: horizonte cinematográfico, revista de arquitectura, observatorio nocturno, cartel musical ácido, editorial de perfume, galería brutalista, obrador cálido, mapa de montaña y producto digital azul.
+El resto de la colección explora once lenguajes: horizonte cinematográfico, revista de arquitectura, observatorio nocturno, cartel musical ácido, editorial de perfume, galería experimental, obrador cálido, mapa de montaña, producto digital azul, consola fosforescente y taller de prototipos brutalista.
 
 ## Sistema compartido
 

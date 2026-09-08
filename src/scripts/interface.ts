@@ -1,4 +1,5 @@
 import { planets } from '../data/solar.mjs';
+import { completeTerminalCommand, executeTerminalCommand } from '../lib/terminal';
 const menuToggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
 const sidebar = document.querySelector<HTMLElement>('.sidebar');
 const mobile = window.matchMedia('(max-width: 800px)');
@@ -96,4 +97,88 @@ document.querySelectorAll<HTMLButtonElement>('[data-planet]').forEach(button=>bu
   text('planet-name',planet?.name || 'El Sol');
   text('planet-description',planet?.description || 'Una estrella, ocho planetas y un viaje que no se detiene. Selecciona un mundo para acercarte.');
   document.dispatchEvent(new CustomEvent('scene:planet',{detail:index}));
+}));
+
+const terminalRoot = document.querySelector<HTMLElement>('[data-terminal-root]');
+const terminalForm = document.querySelector<HTMLFormElement>('[data-terminal-form]');
+const terminalInput = document.querySelector<HTMLInputElement>('[data-terminal-input]');
+const terminalOutput = document.querySelector<HTMLElement>('#terminal-output');
+const terminalHistory: string[] = [];
+let terminalHistoryIndex = 0;
+
+function appendTerminalLine(value: string, className = '') {
+  if (!terminalOutput) return;
+  const line = document.createElement('p');
+  line.className = `terminal-line ${className}`.trim();
+  line.textContent = value || ' ';
+  terminalOutput.append(line);
+  terminalOutput.scrollTop = terminalOutput.scrollHeight;
+}
+
+function runTerminalCommand(command: string) {
+  if (!terminalRoot || !terminalOutput) return;
+  const trimmed = command.trim();
+  if (trimmed) {
+    terminalHistory.push(trimmed);
+    terminalHistoryIndex = terminalHistory.length;
+    appendTerminalLine(`visitor@portfolio:~$ ${trimmed}`, 'terminal-command-line');
+  }
+  const result = executeTerminalCommand(command);
+  if (result.kind === 'clear') terminalOutput.replaceChildren();
+  if (result.kind === 'theme' && result.value) terminalRoot.dataset.theme = result.value;
+  result.lines.forEach(line => appendTerminalLine(line, line.startsWith('cat:') || line.includes('no encontrado') ? 'terminal-error' : ''));
+  document.dispatchEvent(new CustomEvent('scene:intensity', { detail: 1 + terminalHistory.length * .08 }));
+  if (result.kind === 'navigate') {
+    appendTerminalLine(`Abriendo ${result.value || 'cv'}…`, 'terminal-success');
+    const base = terminalRoot.dataset.base || '/';
+    const prefix = base.replace(/\/$/, '');
+    const destination = result.value ? `${result.value}/` : '';
+    window.setTimeout(() => window.location.assign(`${prefix}/${destination}`), 280);
+  }
+}
+
+terminalForm?.addEventListener('submit', event => {
+  event.preventDefault();
+  if (!terminalInput) return;
+  runTerminalCommand(terminalInput.value);
+  terminalInput.value = '';
+});
+terminalInput?.addEventListener('keydown', event => {
+  if (event.key === 'Tab') {
+    event.preventDefault();
+    terminalInput.value = completeTerminalCommand(terminalInput.value);
+    terminalInput.setSelectionRange(terminalInput.value.length, terminalInput.value.length);
+  }
+  if (event.key === 'ArrowUp' && terminalHistory.length) {
+    event.preventDefault();
+    terminalHistoryIndex = Math.max(0, terminalHistoryIndex - 1);
+    terminalInput.value = terminalHistory[terminalHistoryIndex] || '';
+  }
+  if (event.key === 'ArrowDown' && terminalHistory.length) {
+    event.preventDefault();
+    terminalHistoryIndex = Math.min(terminalHistory.length, terminalHistoryIndex + 1);
+    terminalInput.value = terminalHistory[terminalHistoryIndex] || '';
+  }
+  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'l') {
+    event.preventDefault();
+    runTerminalCommand('clear');
+  }
+});
+document.querySelector<HTMLElement>('[data-terminal-window]')?.addEventListener('click', () => terminalInput?.focus());
+document.querySelectorAll<HTMLButtonElement>('[data-terminal-command]').forEach(button => button.addEventListener('click', () => {
+  runTerminalCommand(button.dataset.terminalCommand || '');
+  terminalInput?.focus();
+}));
+
+const brutalModes = [
+  { verb: 'MOSTRAR LAS COSTURAS', note: 'Cada unión queda visible. Si algo sostiene la idea, merece ocupar espacio.', mode: 'structure' },
+  { verb: 'SEPARAR LAS PIEZAS', note: 'Alejar cada parte permite entender qué hace y qué sobra antes de volver a montar.', mode: 'exploded' },
+  { verb: 'FORZAR LA COMPOSICIÓN', note: 'La tensión rompe la comodidad de la cuadrícula y dirige la mirada hacia lo importante.', mode: 'tension' },
+];
+document.querySelectorAll<HTMLButtonElement>('[data-brutal-mode]').forEach(button => button.addEventListener('click', () => {
+  const mode = brutalModes[Number(button.dataset.brutalMode)];
+  const lab = document.querySelector<HTMLElement>('[data-brutal-lab]');
+  if (lab) lab.dataset.mode = mode.mode;
+  text('brutal-verb', mode.verb);
+  text('brutal-note', mode.note);
 }));

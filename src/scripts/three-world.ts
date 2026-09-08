@@ -193,6 +193,99 @@ export function createScene(host: HTMLElement, kind: SceneKind) {
     animation=t=>{world.rotation.y=t*.1+pointer.x*.2;world.rotation.x=.2+Math.sin(t*.15)*.12;core.rotation.y=-t*.3;core.scale.setScalar(1+Math.sin(t*.9)*.07);blue.color.set(['#5d8fe8','#8274d2','#329c9a'][variant]);lineMat.color.set(['#8faee6','#aba0df','#78bfbe'][variant]);};
   }
 
+  if (kind === 'terminal') {
+    renderer.toneMappingExposure = .75;
+    scene.environmentIntensity = .15;
+    const phosphor = new THREE.MeshBasicMaterial({ color: '#5cff9d', wireframe: true, transparent: true, opacity: .78 });
+    const dim = new THREE.LineBasicMaterial({ color: '#245d3e', transparent: true, opacity: .48 });
+    const grid = new THREE.GridHelper(10, 24, '#5cff9d', '#173725');
+    grid.rotation.x = Math.PI / 2;
+    grid.position.z = -2.2;
+    world.add(grid);
+    const core = addMesh(new THREE.IcosahedronGeometry(.72, 1), phosphor);
+    const modules: THREE.LineSegments[] = [];
+    const modulePositions = [
+      [-2.5, 1.25, -.4], [-1.2, 1.75, .2], [1.15, 1.6, -.2], [2.55, .85, .15],
+      [-2.65, -.8, .3], [-1.35, -1.65, -.25], [1.2, -1.55, .15], [2.6, -.7, -.35],
+    ];
+    modulePositions.forEach(([x, y, z], index) => {
+      const geometry = new THREE.BoxGeometry(.54 + (index % 3) * .12, .3 + (index % 2) * .18, .38);
+      const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geometry), dim);
+      edges.position.set(x, y, z);
+      edges.rotation.set(index * .13, index * .21, index * -.08);
+      modules.push(edges);
+      world.add(edges);
+      const lineGeometry = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(), edges.position.clone()]);
+      world.add(new THREE.Line(lineGeometry, dim));
+    });
+    const particles = new THREE.Points(
+      new THREE.BufferGeometry().setFromPoints(Array.from({ length: 80 }, (_, index) => {
+        const angle = index * 2.399;
+        const radius = 1.15 + (index % 13) * .14;
+        return new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * radius, (index % 7) * .15 - .45);
+      })),
+      new THREE.PointsMaterial({ color: '#5cff9d', size: .025, transparent: true, opacity: .62 }),
+    );
+    world.add(particles);
+    camera.position.z = 7.6;
+    animation = t => {
+      const pulse = 1 + Math.sin(t * 2.2) * (.025 + Math.min(intensity, 3) * .01);
+      core.scale.setScalar(pulse);
+      core.rotation.set(t * .16, -t * .25, pointer.x * .35);
+      modules.forEach((module, index) => {
+        module.rotation.y += .0008 * (index + 1);
+        module.position.z += Math.sin(t * 1.4 + index) * .0005 * Math.min(intensity, 3);
+      });
+      particles.rotation.z = -t * .035;
+      world.rotation.set(pointer.y * .07, pointer.x * .1, Math.sin(t * .12) * .015);
+    };
+  }
+
+  if (kind === 'brutal') {
+    renderer.toneMappingExposure = .9;
+    scene.environmentIntensity = .25;
+    const ink = makeMaterial('#111111', .7, .08);
+    const orange = makeMaterial('#ff5b35', .55, .05);
+    const cyan = makeMaterial('#55e6e2', .65, .02);
+    const panelData: { mesh: THREE.Mesh; base: THREE.Vector3; exploded: THREE.Vector3; tense: THREE.Vector3 }[] = [];
+    const panel = (geometry: THREE.BufferGeometry, material: THREE.Material, base: [number, number, number], exploded: [number, number, number], tense: [number, number, number]) => {
+      const mesh = addMesh(geometry, material);
+      mesh.position.set(...base);
+      mesh.castShadow = true;
+      panelData.push({ mesh, base: new THREE.Vector3(...base), exploded: new THREE.Vector3(...exploded), tense: new THREE.Vector3(...tense) });
+      const edges = new THREE.LineSegments(new THREE.EdgesGeometry(geometry), new THREE.LineBasicMaterial({ color: '#050505' }));
+      mesh.add(edges);
+      return mesh;
+    };
+    panel(new THREE.BoxGeometry(2.5, 1.7, .18), orange, [0, 0, 0], [-.6, .35, .7], [-.35, .2, .1]);
+    panel(new THREE.BoxGeometry(1.4, 1.15, .22), cyan, [1.35, .45, .35], [2.1, 1.15, 1.1], [1.65, .75, -.15]);
+    panel(new THREE.BoxGeometry(1.6, .48, .3), ink, [-1.35, -.7, .25], [-2.2, -1.25, .9], [-1.7, -.9, -.2]);
+    panel(new THREE.BoxGeometry(.3, 3.1, .3), ink, [-1.55, .45, -.25], [-2.45, .7, -.7], [-1.9, .5, .25]);
+    panel(new THREE.BoxGeometry(3.8, .22, .38), ink, [.3, 1.3, -.2], [.55, 2.05, -.85], [.15, 1.65, .35]);
+    for (let index = 0; index < 7; index++) {
+      const bolt = addMesh(new THREE.CylinderGeometry(.07, .07, .16, 12), makeMaterial(index % 2 ? '#55e6e2' : '#ff5b35', .3, .4));
+      bolt.rotation.x = Math.PI / 2;
+      bolt.position.set(-1.15 + (index % 4) * .78, -.52 + Math.floor(index / 4) * 1.4, .62);
+    }
+    const outline = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(4.8, 3.45, 1.2)), new THREE.LineDashedMaterial({ color: '#111111', dashSize: .12, gapSize: .08 }));
+    (outline.material as THREE.LineDashedMaterial).transparent = true;
+    (outline.material as THREE.LineDashedMaterial).opacity = .36;
+    outline.computeLineDistances();
+    world.add(outline);
+    camera.position.set(0, .05, 7.8);
+    animation = t => {
+      panelData.forEach((item, index) => {
+        const targetPosition = variant === 1 ? item.exploded : variant === 2 ? item.tense : item.base;
+        item.mesh.position.lerp(targetPosition, .065);
+        const targetRotation = variant === 1 ? (index - 2) * .12 : variant === 2 ? (index % 2 ? -.22 : .16) : 0;
+        item.mesh.rotation.z += (targetRotation - item.mesh.rotation.z) * .065;
+      });
+      outline.rotation.z = Math.sin(t * .22) * .018;
+      world.rotation.y = pointer.x * .14 + Math.sin(t * .13) * .04;
+      world.rotation.x = pointer.y * .08;
+    };
+  }
+
   if (kind === 'architecture') {
     renderer.toneMappingExposure = .85;
     scene.environmentIntensity = .3;

@@ -9,6 +9,8 @@ export const projects = [
   { slug: 'miga', name: 'Miga', category: 'Gastronomía · Obrador', short: 'Gastronomía', color: '#edbd58', scene: 'bread', title: 'Miga — Hoy hay pan.', description: 'Un obrador conceptual de masa madre. Harina, agua, paciencia y un poco de magia.' },
   { slug: 'cota', name: 'Cota', category: 'Montaña · Aventura', short: 'Montaña', color: '#9daa80', scene: 'mountain', title: 'Cota — Más allá del ruido', description: 'Exploración de montaña y rutas para quienes prefieren el camino largo.' },
   { slug: 'nexo', name: 'Nexo', category: 'Tecnología · Inteligencia', short: 'Inteligencia artificial', color: '#83a8fb', scene: 'ai', title: 'Nexo — Las ideas no viven solas', description: 'Un concepto de inteligencia aplicada para conectar datos, ideas y decisiones.' },
+  { slug: 'terminal', name: 'Terminal', category: 'Sistema · Interacción', short: 'Consola interactiva', color: '#5cff9d', scene: 'terminal', title: 'Terminal — Escribe algo. El sistema responde.', description: 'Una consola de portfolio interactiva con comandos, historial, autocompletado, temas y navegación entre experiencias.' },
+  { slug: 'crudo', name: 'Crudo', category: 'Diseño · Prototipo', short: 'Taller brutalista', color: '#ff5b35', scene: 'brutal', title: 'Crudo — Primero funciona. Luego hablamos.', description: 'Un taller digital brutalista que muestra la estructura, rompe la cuadrícula y convierte cada decisión en materia visible.' },
 ] as const;
 export type SceneKind = typeof projects[number]['scene'];
 export type Project = typeof projects[number];

@@ -4,13 +4,13 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const root=resolve('dist');
-const slugs=['','pelago','forma','orbita','pulso','bruma','umbral','miga','cota','nexo'];
-test('las diez landings estáticas permiten navegar a todas las demás y descargar el CV',()=>{
+const slugs=['','pelago','forma','orbita','pulso','bruma','umbral','miga','cota','nexo','terminal','crudo'];
+test('las doce landings estáticas permiten navegar a todas las demás y descargar el CV',()=>{
   const pages=slugs.map(slug=>resolve(root,slug,'index.html'));
-  assert.equal(pages.filter(existsSync).length,10,'Deben existir diez páginas HTML independientes');
+  assert.equal(pages.filter(existsSync).length,12,'Deben existir doce páginas HTML independientes');
   for(const page of pages){
     const html=readFileSync(page,'utf8');
-    assert.equal((html.match(/class="project-link/g)||[]).length,10,`${page}: el menú debe enlazar diez landings`);
+    assert.equal((html.match(/class="project-link/g)||[]).length,12,`${page}: el menú debe enlazar doce landings`);
     assert.equal((html.match(/aria-current="page"/g)||[]).length,1,`${page}: debe existir una única página seleccionada`);
     assert.equal((html.match(/<h1[\s>]/g)||[]).length,1,`${page}: debe existir un título principal`);
     assert.match(html,/data-scene=/,`${page}: falta la escena de Three.js`);
