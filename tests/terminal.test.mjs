@@ -36,11 +36,11 @@ test('theme acepta las tres paletas del terminal', () => {
   assert.match(executeTerminalCommand('theme pink').lines.join('\n'), /green · amber · ice/);
 });
 
-test('projects enumera las 22 experiencias navegables', () => {
+test('projects enumera las 30 experiencias navegables', () => {
   const result = executeTerminalCommand('projects');
 
-  assert.equal(result.lines.length, 22);
-  assert.match(result.lines.at(-1), /la-huerta/);
+  assert.equal(result.lines.length, 30);
+  assert.match(result.lines.at(-1), /veta/);
 });
 
 test('la consola responde a texto libre y explica los comandos desconocidos', () => {

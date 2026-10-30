@@ -4,14 +4,14 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const root=resolve('dist');
-const businessSlugs=['sobremesa','savia','kilometro','salitre','tallo','radial','casa-calma','compania','bloque','la-huerta'];
+const businessSlugs=['sobremesa','savia','kilometro','salitre','tallo','radial','casa-calma','compania','bloque','la-huerta','aguja','portal','tierra','ambar','rehabita','margen','nudo','veta'];
 const slugs=['','pelago','forma','orbita','pulso','bruma','umbral','miga','cota','nexo','terminal','crudo',...businessSlugs];
-test('las 22 landings estáticas permiten navegar a todas las demás y descargar el CV',()=>{
+test('las 30 landings estáticas permiten navegar a todas las demás y descargar el CV',()=>{
   const pages=slugs.map(slug=>resolve(root,slug,'index.html'));
-  assert.equal(pages.filter(existsSync).length,22,'Deben existir 22 páginas HTML independientes');
+  assert.equal(pages.filter(existsSync).length,30,'Deben existir 30 páginas HTML independientes');
   for(const page of pages){
     const html=readFileSync(page,'utf8');
-    assert.equal((html.match(/class="project-link/g)||[]).length,22,`${page}: el menú debe enlazar 22 landings`);
+    assert.equal((html.match(/class="project-link/g)||[]).length,30,`${page}: el menú debe enlazar 30 landings`);
     assert.equal((html.match(/aria-current="page"/g)||[]).length,1,`${page}: debe existir una única página seleccionada`);
     assert.equal((html.match(/<h1[\s>]/g)||[]).length,1,`${page}: debe existir un título principal`);
     if (businessSlugs.some(slug=>page===resolve(root,slug,'index.html'))) {

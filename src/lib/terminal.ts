@@ -1,4 +1,5 @@
 import { businesses } from '../data/businesses.ts';
+import { extendedBusinesses } from '../data/extended.ts';
 export type TerminalResult = {
   kind: 'output' | 'clear' | 'navigate' | 'theme';
   lines: string[];
@@ -20,6 +21,7 @@ const destinations: Record<string, string> = {
   terminal: 'terminal',
   crudo: 'crudo',
   ...Object.fromEntries(businesses.map(business => [business.slug, business.slug])),
+  ...Object.fromEntries(extendedBusinesses.map(business => [business.slug, business.slug])),
 };
 
 const commands = ['help', 'whoami', 'ls', 'projects', 'experience', 'skills', 'cat', 'open', 'theme', 'date', 'echo', 'clear'];
@@ -87,6 +89,7 @@ export function executeTerminalCommand(rawCommand: string): TerminalResult {
       '11  terminal  consola interactiva',
       '12  crudo     taller brutalista',
       ...businesses.map((business, index) => `${index + 13}  ${business.slug.padEnd(12)} ${business.short}`),
+      ...extendedBusinesses.map((business, index) => `${index + 23}  ${business.slug.padEnd(12)} ${business.short}`),
     ],
   };
 

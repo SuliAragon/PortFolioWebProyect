@@ -1,0 +1,5 @@
+---
+interface Props { name:string; label:string; links:[string,string][] }
+const {name,label,links}=Astro.props;
+---
+<nav class="ex-nav" aria-label={`Navegación de ${name}`}><a class="ex-logo" href="#">{name}<sup>®</sup><small>{label}</small></a><div>{links.map(([href,text])=><a href={href}>{text}</a>)}</div><a class="ex-nav-cta" href="#contacto">Hablemos ↗</a></nav>

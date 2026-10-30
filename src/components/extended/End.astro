@@ -1,0 +1,7 @@
+---
+interface Props { name:string; title:string; questions:[string,string][]; choices:string[] }
+const {name,title,questions,choices}=Astro.props;
+---
+<section class="ex-faq ex-section" id="preguntas"><div><span class="ex-label">ANTES DE DAR EL PASO</span><h2>Las cosas,<br/><em>claras.</em></h2></div><div>{questions.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}</div></section>
+<section class="ex-contact ex-section" id="contacto"><div><span class="ex-label">CONVERSEMOS</span><h2>{title}</h2><p>Elige qué te interesa y prepara un resumen de tu consulta.</p><span class="ex-note">Demostración local. No se envían mensajes ni se realizan reservas o pagos.</span></div><form data-ex-contact><label>Me interesa<select name="interest">{choices.map(choice=><option>{choice}</option>)}</select></label><label>Lo que tienes en mente<textarea name="message" rows="3" required minlength="10" maxlength="600" placeholder="Cuéntanos los detalles que te gustaría comentar…"></textarea></label><button class="ex-button" type="submit">Preparar consulta <span>↗</span></button><p data-contact-result role="status"></p></form></section>
+<footer class="ex-footer"><a class="ex-logo" href="#">{name}<sup>®</sup></a><p>Un concepto original de Jesús Aragón.<br/>Negocio, catálogo, equipo y tarifas ficticios para portfolio.</p><a href="#">Volver al principio ↑</a></footer>

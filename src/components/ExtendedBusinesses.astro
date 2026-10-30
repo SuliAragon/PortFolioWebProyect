@@ -1,0 +1,18 @@
+---
+import '../styles/extended.css';
+import Aguja from './extended/Aguja.astro';
+import Portal from './extended/Portal.astro';
+import Tierra from './extended/Tierra.astro';
+import Ambar from './extended/Ambar.astro';
+import Rehabita from './extended/Rehabita.astro';
+import Margen from './extended/Margen.astro';
+import Nudo from './extended/Nudo.astro';
+import Veta from './extended/Veta.astro';
+interface Props {slug:string}
+const {slug}=Astro.props;
+---
+<div class={`extended ex-${slug}`} data-extended={slug}>
+{slug==='aguja'&&<Aguja/>}{slug==='portal'&&<Portal/>}{slug==='tierra'&&<Tierra/>}{slug==='ambar'&&<Ambar/>}
+{slug==='rehabita'&&<Rehabita/>}{slug==='margen'&&<Margen/>}{slug==='nudo'&&<Nudo/>}{slug==='veta'&&<Veta/>}
+</div>
+<script>import '../scripts/extended';</script>
