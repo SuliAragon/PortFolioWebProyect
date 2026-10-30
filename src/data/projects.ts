@@ -1,3 +1,4 @@
+import { businesses } from './businesses';
 export const projects = [
   { slug: '', name: 'Jesús Aragón', category: 'Currículum · Desarrollo', short: 'Currículum', color: '#e96835', scene: 'cv', title: 'Jesús Aragón — Desarrollador de aplicaciones', description: 'Desarrollador de aplicaciones multiplataforma en Cádiz. Frontend, backend y datos. Experiencia, formación y portfolio de Jesús Aragón Monzón.' },
   { slug: 'pelago', name: 'Pélago', category: 'Océano · Experiencias', short: 'Océano', color: '#62cbd0', scene: 'ocean', title: 'Pélago — Respira.', description: 'Un concepto de escapadas junto al océano. Agua, luz y tiempo para volver a lo esencial.' },
@@ -11,6 +12,7 @@ export const projects = [
   { slug: 'nexo', name: 'Nexo', category: 'Tecnología · Inteligencia', short: 'Inteligencia artificial', color: '#83a8fb', scene: 'ai', title: 'Nexo — Las ideas no viven solas', description: 'Un concepto de inteligencia aplicada para conectar datos, ideas y decisiones.' },
   { slug: 'terminal', name: 'Terminal', category: 'Sistema · Interacción', short: 'Consola interactiva', color: '#5cff9d', scene: 'terminal', title: 'Terminal — Escribe algo. El sistema responde.', description: 'Una consola de portfolio interactiva con comandos, historial, autocompletado, temas y navegación entre experiencias.' },
   { slug: 'crudo', name: 'Crudo', category: 'Diseño · Prototipo', short: 'Taller brutalista', color: '#ff5b35', scene: 'brutal', title: 'Crudo — Primero funciona. Luego hablamos.', description: 'Un taller digital brutalista que muestra la estructura, rompe la cuadrícula y convierte cada decisión en materia visible.' },
+  ...businesses,
 ] as const;
 export type SceneKind = typeof projects[number]['scene'];
 export type Project = typeof projects[number];

@@ -1,0 +1,14 @@
+---
+interface Props { title: string; options: string[]; action?: string }
+const { title, options, action = 'Preparar solicitud' } = Astro.props;
+---
+<section class="biz-booking" id="reserva">
+  <div><span class="biz-kicker">NOS VEMOS PRONTO</span><h2>{title}</h2><p>Elige lo que necesitas y encuentra tu momento.</p></div>
+  <form data-booking>
+    <label>Tu elección<select name="service">{options.map(option => <option>{option}</option>)}</select></label>
+    <label>Día<input name="date" type="date" required data-future-date /></label>
+    <label>Hora<select name="time">{['10:00','11:30','13:00','17:00','18:30','20:00'].map(time => <option>{time}</option>)}</select></label>
+    <button class="biz-button" type="submit">{action} <span>↗</span></button>
+    <p class="biz-result" data-booking-result role="status">Demo de portfolio: podrás revisar tu elección; no se realiza ninguna reserva.</p>
+  </form>
+</section>

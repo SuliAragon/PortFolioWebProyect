@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/collection.css';
 import '@fontsource-variable/manrope';
 import '@fontsource-variable/space-grotesk';
 import '@fontsource/cormorant-garamond/400.css';
@@ -37,7 +38,7 @@ const totalLabel = String(total).padStart(2, '0');
     <div class="mobile-bar"><a href={url('')} class="monogram">ja<span>®</span></a><span>ÍNDICE DE EXPLORACIONES</span><button class="menu-toggle" aria-expanded="false" aria-controls="gallery-sidebar">Menú <span>＋</span></button></div>
     <aside class="sidebar" id="gallery-sidebar">
       <a class="sidebar-brand" href={url('')} aria-label="Jesús Aragón, inicio"><span class="monogram">ja<span>®</span></span><span>JESÚS ARAGÓN<br/><small>PORTFOLIO / 2026</small></span></a>
-      <div class="sidebar-intro"><span class="eyebrow">UN MISMO AUTOR.</span><p>Doce formas<br/>de ver la web.</p></div>
+      <div class="sidebar-intro"><span class="eyebrow">UN MISMO AUTOR.</span><p>{total} formas<br/>de ver la web.</p></div>
       <div class="index-label"><span>EXPLORACIONES</span><span>01 — {totalLabel}</span></div>
       <nav aria-label="Seleccionar landing">
         {projects.map((p, i) => <a class:list={['project-link', { active: p.slug === project.slug }]} href={url(p.slug)} aria-current={p.slug === project.slug ? 'page' : undefined} style={`--swatch: ${p.color}`}><span class="project-number">{String(i + 1).padStart(2, '0')}</span><span class="project-info"><strong>{p.name}</strong><small>{p.short}</small></span><span class="project-dot" aria-hidden="true"></span></a>)}

@@ -1,8 +1,9 @@
 ---
 import Gallery from '../layouts/Gallery.astro';
 import Concepts from '../components/Concepts.astro';
+import Businesses from '../components/Businesses.astro';
 import { projects } from '../data/projects';
 export function getStaticPaths() { return projects.filter(p => p.slug).map(project => ({ params: { slug: project.slug }, props: { project } })); }
 const { project } = Astro.props;
 ---
-<Gallery project={project}><Concepts slug={project.slug} /></Gallery>
+<Gallery project={project}>{project.scene === 'business' ? <Businesses slug={project.slug} /> : <Concepts slug={project.slug} />}</Gallery>

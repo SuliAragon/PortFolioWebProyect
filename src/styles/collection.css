@@ -1,0 +1,4 @@
+.sidebar>nav{min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;flex:1;padding:2px 3px 5px}
+.sidebar-brand,.sidebar-intro,.index-label,.sidebar-bottom{flex-shrink:0}
+.sidebar-bottom{margin-top:0}
+@media(max-width:800px){.sidebar{bottom:0;height:calc(100dvh - 64px)}}

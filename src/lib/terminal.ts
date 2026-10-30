@@ -1,3 +1,4 @@
+import { businesses } from '../data/businesses.ts';
 export type TerminalResult = {
   kind: 'output' | 'clear' | 'navigate' | 'theme';
   lines: string[];
@@ -18,6 +19,7 @@ const destinations: Record<string, string> = {
   nexo: 'nexo',
   terminal: 'terminal',
   crudo: 'crudo',
+  ...Object.fromEntries(businesses.map(business => [business.slug, business.slug])),
 };
 
 const commands = ['help', 'whoami', 'ls', 'projects', 'experience', 'skills', 'cat', 'open', 'theme', 'date', 'echo', 'clear'];
@@ -84,6 +86,7 @@ export function executeTerminalCommand(rawCommand: string): TerminalResult {
       '10  nexo      inteligencia aplicada',
       '11  terminal  consola interactiva',
       '12  crudo     taller brutalista',
+      ...businesses.map((business, index) => `${index + 13}  ${business.slug.padEnd(12)} ${business.short}`),
     ],
   };
 
